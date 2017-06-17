@@ -1,71 +1,49 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import PasswordPrompt from './PasswordPrompt'
 
 const Loading = () => <div>Loading...</div>
-
-class PasswordPrompt extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      password: ''
-    }
-
-    this.handlePasswordChange = this.handlePasswordChange.bind(this)
-  }
-
-  handlePasswordChange (e) {
-    this.setState({
-      password: e.target.value
-    })
-  }
-
-  handleSubmit (e) {
-    e.preventDefault()
-    this.props.onSubmit(this.state.password)
-  }
-
-  render () {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        Password:
-        <input type='password' onChange={this.handlePasswordChange} />
-        <button onClick={this.handleSubmit} />
-      </form>
-    )
-  }
-}
 
 class Protection extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      isLoading: true,
-      isProtected: false,
-      isAuthorizing: false,
-      isAuthorized: false,
-      password: this.props.password
+      isLoading: null,
+      isAuthorizing: null,
+      isProtected: null,
+      isAuthorized: null,
+      password: props.password
     }
 
-    this.getMetadata = this.getMetadata.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
+    this.getProtectionStatus = this.getProtectionStatus.bind(this)
+    this.handleSetPassword = this.handleSetPassword.bind(this)
+  }
 
-    if (!this.state.password) {
-      this.getMetadata()
+  componentDidMount () {
+    this.getProtectionStatus()
+
+    if (this.state.password) {
+      this.handleSetPassword(this.state.password)
     }
   }
 
-  async getMetadata () {
+  async getProtectionStatus () {
     const { channel } = this.props
+
+    this.setState({
+      isLoading: true
+    })
+
     const isProtected = await this.props.relay.isProtected({ channel })
+
     this.setState({
       isProtected,
       isLoading: false
     })
   }
 
-  async onSubmit (password) {
+  async handleSetPassword (password) {
     const { channel } = this.props
 
     this.setState({
@@ -95,12 +73,14 @@ class Protection extends Component {
       return <Loading />
     } else if (isAuthorizing) {
       return <Loading />
-    } else if ((!isProtected) || (password && isAuthorized)) {
-      return React.cloneElement(children, { password })
-    } else if (isProtected || !isAuthorized) {
-      return <PasswordPrompt onSubmit={this.onSubmit} />
-    } else {
+    } else if (!isProtected) {
       return children
+    } else if (isProtected && isAuthorized === false) {
+      return <PasswordPrompt onSubmit={this.handleSetPassword} wrongPassword />
+    } else if (isProtected && !password) {
+      return <PasswordPrompt onSubmit={this.handleSetPassword} />
+    } else {
+      return React.cloneElement(children, { password })
     }
   }
 }
