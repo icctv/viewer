@@ -4,14 +4,34 @@ import PropTypes from 'prop-types'
 const Loading = () => <div>Loading...</div>
 
 class PasswordPrompt extends Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      password: ''
+    }
+
+    this.handlePasswordChange = this.handlePasswordChange.bind(this)
+  }
+
+  handlePasswordChange (e) {
+    this.setState({
+      password: e.target.value
+    })
+  }
+
+  handleSubmit (e) {
+    e.preventDefault()
+    this.props.onSubmit(this.state.password)
+  }
+
   render () {
-    const { onSubmit } = this.props
     return (
-      <div>
+      <form onSubmit={this.handleSubmit}>
         Password:
-        <input type='password' />
-        <button onClick={onSubmit} />
-      </div>
+        <input type='password' onChange={this.handlePasswordChange} />
+        <button onClick={this.handleSubmit} />
+      </form>
     )
   }
 }
