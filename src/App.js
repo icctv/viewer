@@ -14,17 +14,6 @@ class App extends Component {
     this.state = {
       relay: makeRelay({ relayUrl })
     }
-
-    this.getUrl = this.getUrl.bind(this)
-  }
-
-  getUrl () {
-    const { channel, password, relayUrl } = this.props
-
-    const baseUrl = relayUrl.replace(/^http/, 'ws')
-    const url = [baseUrl, 'out', channel, password].join('/')
-
-    return url
   }
 
   render () {
@@ -37,7 +26,7 @@ class App extends Component {
           <Player
             width={360}
             height={240}
-            url={this.getUrl()} />
+            url={relay.getStreamUrl({ channel, password })} />
         </Protection>
       </div>
     )

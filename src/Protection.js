@@ -60,7 +60,7 @@ class Protection extends Component {
   }
 
   render () {
-    const { children } = this.props
+    const { children, channel, relay } = this.props
     const {
       password,
       isLoading,
@@ -69,18 +69,24 @@ class Protection extends Component {
       isAuthorized
     } = this.state
 
+    const url = relay.getStreamUrl({ channel, password })
+
     if (isLoading) {
       return <Loading />
     } else if (isAuthorizing) {
       return <Loading />
-    } else if (!isProtected) {
+    }
+
+    if (!isProtected) {
       return children
-    } else if (isProtected && isAuthorized === false) {
+    }
+
+    if (isProtected && isAuthorized === false) {
       return <PasswordPrompt onSubmit={this.handleSetPassword} wrongPassword />
     } else if (isProtected && !password) {
       return <PasswordPrompt onSubmit={this.handleSetPassword} />
     } else {
-      return React.cloneElement(children, { password })
+      return React.cloneElement(children, { url })
     }
   }
 }

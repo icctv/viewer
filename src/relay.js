@@ -13,5 +13,11 @@ export default ({ relayUrl }) => {
       .then(r => r.isAuthorized)
   }
 
-  return { isProtected, isAuthorized }
+  const getStreamUrl = ({ channel, password }) => {
+    const baseUrl = relayUrl.replace(/^http/, 'ws')
+    const url = [baseUrl, 'out', channel, password].join('/')
+    return url
+  }
+
+  return { relayUrl, isProtected, isAuthorized, getStreamUrl }
 }
