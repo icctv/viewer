@@ -1,3 +1,18 @@
-body, html {
-  background-color: '#333'
+@font-face {
+  font-family: system;
+  font-style: normal;
+  font-weight: 300;
+  src: local(".SFNSText-Light"), local(".HelveticaNeueDeskInterface-Light"), local(".LucidaGrandeUI"), local("Ubuntu Light"), local("Segoe UI Light"), local("Roboto-Light"), local("DroidSans"), local("Tahoma");
+}
+
+body, html, #root, #root>div {
+  background-color: #000;
+  color: #cecece;
+  padding: 0;
+  margin: 0;
+  font-family: 'system';
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  border: none;
 }

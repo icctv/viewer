@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Loading from './Loading'
 import PasswordPrompt from './PasswordPrompt'
-
-const Loading = () => <div>Loading...</div>
 
 class Protection extends Component {
   constructor (props) {
