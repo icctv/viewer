@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-class Viewer extends Component {
-
+class Player extends Component {
   constructor (props) {
     super(props)
 
@@ -39,10 +38,10 @@ class Viewer extends Component {
   }
 }
 
-Viewer.propTypes = {
+Player.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   url: PropTypes.string.isRequired
 }
 
-export default Viewer
+export default Player
