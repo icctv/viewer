@@ -22,7 +22,9 @@ class Protection extends Component {
 
     this.state = {
       isLoading: true,
-      isProtected: true,
+      isProtected: false,
+      isAuthorizing: false,
+      isAuthorized: false,
       password: this.props.password
     }
 
@@ -36,28 +38,46 @@ class Protection extends Component {
 
   async getMetadata () {
     const { channel } = this.props
-    const { isProtected } = await this.props.relay.getMetadata({ channel })
+    const isProtected = await this.props.relay.isProtected({ channel })
     this.setState({
       isProtected,
       isLoading: false
     })
   }
 
-  onSubmit (password) {
+  async onSubmit (password) {
+    const { channel } = this.props
+
     this.setState({
-      password
+      isAuthorizing: true
+    })
+
+    const isAuthorized = await this.props.relay.isAuthorized({ channel, password })
+
+    this.setState({
+      password,
+      isAuthorized,
+      isAuthorizing: false
     })
   }
 
   render () {
     const { children } = this.props
-    const { password, isLoading, isProtected } = this.state
+    const {
+      password,
+      isLoading,
+      isProtected,
+      isAuthorizing,
+      isAuthorized
+    } = this.state
 
-    if (password) {
-      return React.cloneElement(children, { password })
-    } else if (isLoading) {
+    if (isLoading) {
       return <Loading />
-    } else if (isProtected) {
+    } else if (isAuthorizing) {
+      return <Loading />
+    } else if ((!isProtected) || (password && isAuthorized)) {
+      return React.cloneElement(children, { password })
+    } else if (isProtected || !isAuthorized) {
       return <PasswordPrompt onSubmit={this.onSubmit} />
     } else {
       return children
