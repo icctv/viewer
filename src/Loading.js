@@ -1,12 +1,6 @@
 import React from 'react'
 import './Loading.css'
-
-const containerStyle = {
-  height: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center'
-}
+import { containerStyle } from './App'
 
 const Loading = () => (
   <div style={containerStyle}>

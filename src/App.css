@@ -2,7 +2,7 @@
   font-family: system;
   font-style: normal;
   font-weight: 300;
-  src: local(".SFNSText-Light"), local(".HelveticaNeueDeskInterface-Light"), local(".LucidaGrandeUI"), local("Ubuntu Light"), local("Segoe UI Light"), local("Roboto-Light"), local("DroidSans"), local("Tahoma");
+  src: local('.SFNSText-Light'), local('.HelveticaNeueDeskInterface-Light'), local('.LucidaGrandeUI'), local('Ubuntu Light'), local('Segoe UI Light'), local('Roboto-Light'), local('DroidSans'), local('Tahoma');
 }
 
 body, html, #root, #root>div {
@@ -15,4 +15,29 @@ body, html, #root, #root>div {
   height: 100%;
   width: 100%;
   border: none;
+}
+
+input {
+  display: block;
+  margin: auto auto;
+  width: 120px;
+  font-family: sans-serif;
+  font-size: 18px;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+  padding: 10px;
+  border: none;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #c9c9c9;
+  color: #cecece;
+  background: #000;
+  transition: border 0.3s;
+}
+
+input:focus,
+input.focus {
+  outline: none;
+  border-bottom-color: #c9c9c9;
 }

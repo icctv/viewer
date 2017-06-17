@@ -5,6 +5,13 @@ import Player from './Player'
 import Protection from './Protection'
 import makeRelay from './relay'
 
+export const containerStyle = {
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center'
+}
+
 class App extends Component {
   constructor (props) {
     super(props)
@@ -21,7 +28,7 @@ class App extends Component {
     const { relay } = this.state
 
     return (
-      <div>
+      <div style={containerStyle}>
         <Protection relay={relay} channel={channel} password={password}>
           <Player
             width={360}
