@@ -1,0 +1,15 @@
+language: node_js
+
+node_js:
+  - '8.1.2'
+
+script: yarn run build && zip -r viewer.zip build
+
+deploy:
+  provider: releases
+  api_key:
+    secure: YSGa/f5cX3kwykrxJAwtkY+yfcpRWZKpMKi27LXDTxrNTxjwN73xkjMP6mBvN9dzma4PbG1hyxrCMICK60a8/94oR6Dm8knDkecyJ5nd2ADAS4cnxmBFcFpNwwCmWatGXfQq2MZD4I37Vngntwyy/Fny291dokl4Bg2t0/SNuGgtY+CQx8ffffJt25iZUZIDo29JM31QeiODhK2qQKXeP2p9ixWXIhGH/u2U8y81/4x+zbk1BkoVuCsMVrM8j/mUDCf73g4rfRWf+PZ/CIU+LZ5xiQun6DAPuHUXKhJHiKWXLmoirtAdCWHJkrtk1oanpcLmzZ0oUQX/FlpeuYiZWmZQ9xAL23m83rrP7MJrJgLx9yyY9IS+r1B2UPvWNUHukkr9t2astSQMwNdSeb2e3PY8v/u2jaNNvadV/OBwIOMtJLzpcn8SVfvpsdJC3n4GIgJpdGlXSjMmzTcNbGwgd69a9fai+UlCuIWcwgHFRaFfWKYpM5frG+UcaNq7FYkbHF4qWJskVpJpjU/73t9JDC8QklQ6IaKxDrSroeSCmkLcD3HhyKdDX4fbnvkoNaA2I45a2mhVc3UiYfrD1oVnnsyuK4mrFOsgxK8nFFeEK0Fv70OlvZz2L5PXQGw7JgvkvufDoam2ppn54thPXqtUHl9eFIb0LELJB23CFwe3+N4=
+  file: viewer.zip
+  skip_cleanup: true
+  on:
+    repo: icctv/viewer
