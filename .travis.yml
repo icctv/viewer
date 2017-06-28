@@ -13,3 +13,4 @@ deploy:
   skip_cleanup: true
   on:
     repo: icctv/viewer
+    branch: master
