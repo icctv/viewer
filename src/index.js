@@ -4,7 +4,6 @@ import App from './App'
 
 const props = {
   channel: window.location.hash.substr(1),
-  password: 'unicorn',
   ...window.xprops
 }
 
