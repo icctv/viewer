@@ -12,5 +12,6 @@ deploy:
   file: viewer.zip
   skip_cleanup: true
   on:
+    tags: true
     repo: icctv/viewer
     branch: master
