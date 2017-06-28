@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:8080",
-  "homepage": "https://icctv.gq",
+  "homepage": "http://icctv.gq",
   "dependencies": {
     "gh-pages": "^1.0.0",
     "prop-types": "^15.5.10",
