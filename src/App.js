@@ -47,7 +47,7 @@ App.propTypes = {
 }
 
 App.defaultProps = {
-  relayUrl: process.env.NODE_ENV === 'production' ? 'https://relay.icctv.gq' : 'http://localhost:8080'
+  relayUrl: process.env.NODE_ENV === 'production' ? 'http://relay.icctv.gq' : 'http://localhost:8080'
 }
 
 export default App
